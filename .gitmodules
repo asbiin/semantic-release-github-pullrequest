@@ -1,0 +1,3 @@
+[submodule "semantic-release-github"]
+	path = semantic-release-github
+	url = https://github.com/semantic-release/github

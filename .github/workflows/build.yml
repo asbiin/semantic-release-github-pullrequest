@@ -1,0 +1,81 @@
+name: Build and test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    types: [opened, synchronize, reopened]
+  release:
+    types: [created]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    name: Test (Node ${{ matrix.node-version }})
+
+    strategy:
+      matrix:
+        node-version: [10, 12, 14]
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: npm install
+        uses: bahmutov/npm-install@v1
+
+      - name: run tests
+        run: npm run test
+
+      - name: Set version parameter
+        id: version
+        run: |
+          version=$(git tag --points-at HEAD)
+          test -z "$version" && version="main"
+          echo "::set-output name=value::$version"
+
+      - name: SonarCloud Scan
+        if: matrix.node-version == 14 && env.SONAR_TOKEN != ''
+        uses: SonarSource/sonarcloud-github-action@v1.5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: |
+            -Dsonar.organization=asbiin-github
+            -Dsonar.projectKey=asbiin_semantic-release-github-pullrequest
+            -Dsonar.projectVersion=${{ steps.version.outputs.value }}
+            -Dsonar.sources=index.js,lib/
+            -Dsonar.tests=test/
+            -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+
+  lint:
+    runs-on: ubuntu-latest
+    needs: tests
+    name: Lint (Node ${{ matrix.node-version }})
+
+    strategy:
+      matrix:
+        node-version: [10, 12, 14]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: npm install
+        uses: bahmutov/npm-install@v1
+
+      - name: run lint
+        run: npm run lint
+
+      - name: run lockfile-lint
+        run: npx lockfile-lint --path package-lock.json
