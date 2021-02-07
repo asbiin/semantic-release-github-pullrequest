@@ -52,7 +52,7 @@ test.serial('Create PR with 1 file', async (t) => {
       `/repos/${owner}/${repo}/pulls`,
       `{"head":"${branch}","base":"main","title":"chore(release): update release 1.0.0"}`
     )
-    .reply(200, { id: 1, url: `https://github.com/${owner}/${repo}/pull/1` })
+    .reply(200, { number: 1, html_url: `https://github.com/${owner}/${repo}/pull/1` })
     .put(`/repos/${owner}/${repo}/issues/1/labels`, '{"labels":["semantic-release"]}')
     .reply(200, {});
 
@@ -93,7 +93,7 @@ test.serial('Create PR with 1 new file', async (t) => {
       `/repos/${owner}/${repo}/pulls`,
       `{"head":"${branch}","base":"main","title":"chore(release): update release 1.0.0"}`
     )
-    .reply(200, { id: 1, url: `https://github.com/${owner}/${repo}/pull/1` })
+    .reply(200, { number: 1, html_url: `https://github.com/${owner}/${repo}/pull/1` })
     .put(`/repos/${owner}/${repo}/issues/1/labels`, '{"labels":["semantic-release"]}')
     .reply(200, {});
 
@@ -140,7 +140,7 @@ test.serial('Create PR with 2 files', async (t) => {
       `/repos/${owner}/${repo}/pulls`,
       `{"head":"${branch}","base":"main","title":"chore(release): update release 1.0.0"}`
     )
-    .reply(200, { id: 1, url: `https://github.com/${owner}/${repo}/pull/1` })
+    .reply(200, { number: 1, html_url: `https://github.com/${owner}/${repo}/pull/1` })
     .put(`/repos/${owner}/${repo}/issues/1/labels`, '{"labels":["semantic-release"]}')
     .reply(200, {});
 
@@ -178,7 +178,7 @@ test.serial('Create PR with pullrequest title', async (t) => {
     )
     .reply(200, {})
     .post(`/repos/${owner}/${repo}/pulls`, `{"head":"${branch}","base":"main","title":"my title"}`)
-    .reply(200, { id: 1, url: `https://github.com/${owner}/${repo}/pull/1` })
+    .reply(200, { number: 1, html_url: `https://github.com/${owner}/${repo}/pull/1` })
     .put(`/repos/${owner}/${repo}/issues/1/labels`, '{"labels":["semantic-release"]}')
     .reply(200, {});
 
@@ -218,7 +218,7 @@ test.serial('Create PR with labels', async (t) => {
       `/repos/${owner}/${repo}/pulls`,
       `{"head":"${branch}","base":"main","title":"chore(release): update release 1.0.0"}`
     )
-    .reply(200, { id: 1, url: `https://github.com/${owner}/${repo}/pull/1` })
+    .reply(200, { number: 1, html_url: `https://github.com/${owner}/${repo}/pull/1` })
     .put(`/repos/${owner}/${repo}/issues/1/labels`, '{"labels":["mylabel"]}')
     .reply(200, {});
 
@@ -258,7 +258,7 @@ test.serial('Create PR with branch', async (t) => {
       `/repos/${owner}/${repo}/pulls`,
       `{"head":"${branch}","base":"base","title":"chore(release): update release 1.0.0"}`
     )
-    .reply(200, { id: 1, url: `https://github.com/${owner}/${repo}/pull/1` })
+    .reply(200, { number: 1, html_url: `https://github.com/${owner}/${repo}/pull/1` })
     .put(`/repos/${owner}/${repo}/issues/1/labels`, '{"labels":["semantic-release"]}')
     .reply(200, {});
 
@@ -300,7 +300,7 @@ test.serial('Create PR with branch already exist', async (t) => {
       `/repos/${owner}/${repo}/pulls`,
       `{"head":"${branch}","base":"base","title":"chore(release): update release 1.0.0"}`
     )
-    .reply(200, { id: 1, url: `https://github.com/${owner}/${repo}/pull/1` })
+    .reply(200, { number: 1, html_url: `https://github.com/${owner}/${repo}/pull/1` })
     .put(`/repos/${owner}/${repo}/issues/1/labels`, '{"labels":["semantic-release"]}')
     .reply(200, {});
 
@@ -343,7 +343,7 @@ test.serial('Create PR with default branch already exist', async (t) => {
       `/repos/${owner}/${repo}/pulls`,
       `{"head":"${branch}","base":"base","title":"chore(release): update release 1.0.0"}`
     )
-    .reply(200, { id: 1, url: `https://github.com/${owner}/${repo}/pull/1` })
+    .reply(200, { number: 1, html_url: `https://github.com/${owner}/${repo}/pull/1` })
     .put(`/repos/${owner}/${repo}/issues/1/labels`, '{"labels":["semantic-release"]}')
     .reply(200, {});
 
