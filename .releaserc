@@ -21,6 +21,16 @@
       {
         "assets": ["CHANGELOG.md"]
       }
+    ],
+    [
+      "semantic-release-github-pullrequest",
+      {
+        "assets": ["CHANGELOG.md"],
+        "labels": [
+          "semantic-release",
+          "auto-squash"
+        ]
+      }
     ]
   ]
 }
