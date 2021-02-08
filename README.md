@@ -2,7 +2,7 @@
 
 This plugin is a plugin for [**semantic-release**](https://github.com/semantic-release/semantic-release).
 
-It automatically creates a pull request containing the release notes of a newly published release in your repository, as long as you follow the Semantic release convention.
+It automatically creates a pull request containing changes for any files you want to publish in your repository, like release notes of your newly published release.
 
 [![npm](https://img.shields.io/npm/v/semantic-release-github-pullrequest.svg?style=flat-square)](https://www.npmjs.com/package/semantic-release-github-pullrequest)
 [![npm](https://img.shields.io/npm/dm/semantic-release-github-pullrequest.svg?style=flat-square)](https://www.npmjs.com/package/semantic-release-github-pullrequest)
