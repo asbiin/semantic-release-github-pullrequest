@@ -7,6 +7,7 @@ It automatically creates a pull request containing changes for any files you wan
 [![npm](https://img.shields.io/npm/v/semantic-release-github-pullrequest.svg?style=flat-square)](https://www.npmjs.com/package/semantic-release-github-pullrequest)
 [![npm](https://img.shields.io/npm/dm/semantic-release-github-pullrequest.svg?style=flat-square)](https://www.npmjs.com/package/semantic-release-github-pullrequest)
 [![Build](https://img.shields.io/github/workflow/status/asbiin/semantic-release-github-pullrequest/Build%20and%20test/main)](https://github.com/asbiin/semantic-release-github-pullrequest/actions?query=workflow%3A%22Build+and+test%22)
+[![Code coverage](https://img.shields.io/sonar/coverage/asbiin_semantic-release-github-pullrequest?server=https%3A%2F%2Fsonarcloud.io)](https://sonarcloud.io/project/activity?custom_metrics=coverage&amp;graph=custom&amp;id=asbiin_semantic-release-github-pullrequest)
 [![Lines of Code](https://img.shields.io/tokei/lines/github/asbiin/semantic-release-github-pullrequest)](https://sonarcloud.io/dashboard?id=asbiin_semantic-release-github-pullrequest)
 [![License](https://img.shields.io/github/license/asbiin/semantic-release-github-pullrequest)](https://opensource.org/licenses/MIT)
 
