@@ -1,5 +1,8 @@
 # semantic-release-github-pullrequest
-[**semantic-release**](https://github.com/semantic-release/semantic-release) plugin to create a GitHub pullrequest after a release
+
+This plugin is a plugin for [**semantic-release**](https://github.com/semantic-release/semantic-release).
+
+It automatically creates a pull request containing changes for any files you want to publish in your repository, like release notes of your newly published release.
 
 [![npm](https://img.shields.io/npm/v/semantic-release-github-pullrequest.svg?style=flat-square)](https://www.npmjs.com/package/semantic-release-github-pullrequest)
 [![npm](https://img.shields.io/npm/dm/semantic-release-github-pullrequest.svg?style=flat-square)](https://www.npmjs.com/package/semantic-release-github-pullrequest)
@@ -39,7 +42,7 @@ The plugin can be configured in the [**semantic-release** configuration file](ht
 }
 ```
 
-With this example a GitHub Pull Request will be created, with the content of `CHANGELOG.md` file, on the `main` branch.
+With this example, a GitHub pull request will be created, with the content of `CHANGELOG.md` file, on the `main` branch.
 
 ## Configuration
 
@@ -54,7 +57,7 @@ When creating the token, the **minimum required scopes** are:
 - [`repo`](https://github.com/settings/tokens/new?scopes=repo) for a private repository
 - [`public_repo`](https://github.com/settings/tokens/new?scopes=public_repo) for a public repository
 
-_Note on GitHub Actions:_ You can use the default token which is provided in the secret _GITHUB_TOKEN_. However no workflows will not be triggered in the Pull Request, providing it to be merged.
+_Note on GitHub Actions:_ You can use the default token which is provided in the secret _GITHUB_TOKEN_. However no workflows will be triggered in the Pull Request, providing it to be merged.
 You can use `GH_TOKEN` or `GITHUB_TOKEN` with the secret _GITHUB_TOKEN_ to create the release, and use `GH_TOKEN_RELEASE` with this plugin to create the Pull Request.
 
 ### Environment variables
