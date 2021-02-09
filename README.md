@@ -10,18 +10,19 @@ It automatically creates a pull request containing changes for any files you wan
 [![Lines of Code](https://img.shields.io/tokei/lines/github/asbiin/semantic-release-github-pullrequest)](https://sonarcloud.io/dashboard?id=asbiin_semantic-release-github-pullrequest)
 [![License](https://img.shields.io/github/license/asbiin/semantic-release-github-pullrequest)](https://opensource.org/licenses/MIT)
 
-| Step      | Description                      |
-| --------- | -------------------------------- |
-| `success` | Create a pull request to GitHub. |
+| Step               | Description                                                                                      |
+| ------------------ | ------------------------------------------------------------------------------------------------ |
+| `verifyConditions` | Verify that all needed configuration is present.                                                 |
+| `success`          | Create the branch to upload all assets and create the pull request on the base branch on GitHub. |
+
 
 ## Install
 
 Add the plugin to your npm-project:
 
-```bash
-$ npm install semantic-release-github-pullrequest -D
+```console
+npm install semantic-release-github-pullrequest -D
 ```
-
 
 ## Usage
 
@@ -33,7 +34,7 @@ The plugin can be configured in the [**semantic-release** configuration file](ht
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
     [
-       "semantic-release-github-pullrequest", {
+      "semantic-release-github-pullrequest", {
         "assets": ["CHANGELOG.md"],
         "baseRef": "main"
       }
@@ -50,37 +51,37 @@ With this example, a GitHub pull request will be created, with the content of `C
 
 The GitHub authentication configuration is **required** and can be set via [environment variables](#environment-variables).
 
-Follow the [Creating a personal access token for the command line](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line) documentation to obtain an authentication token. The token has to be made available in your CI environment via the `GH_TOKEN` environment variable. The user associated with the token must have push permission to the repository.
+Follow the [Creating a personal access token for the command line](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line) documentation to obtain an authentication token. The token has to be made available in your CI environment via the `GH_TOKEN_RELEASE` or `GH_TOKEN` environment variable. The user associated with the token must have push permission to the repository.
 
 When creating the token, the **minimum required scopes** are:
 
 - [`repo`](https://github.com/settings/tokens/new?scopes=repo) for a private repository
 - [`public_repo`](https://github.com/settings/tokens/new?scopes=public_repo) for a public repository
 
-_Note on GitHub Actions:_ You can use the default token which is provided in the secret _GITHUB_TOKEN_. However no workflows will be triggered in the Pull Request, providing it to be merged.
+_Note on GitHub Actions:_ You can use the default token which is provided in the secret _GITHUB_TOKEN_. However [no workflows will be triggered in the Pull Request](https://docs.github.com/en/actions/reference/events-that-trigger-workflows#triggering-new-workflows-using-a-personal-access-token), providing it to be merged.
 You can use `GH_TOKEN` or `GITHUB_TOKEN` with the secret _GITHUB_TOKEN_ to create the release, and use `GH_TOKEN_RELEASE` with this plugin to create the Pull Request.
 
 ### Environment variables
 
-| Variable                                           | Description                                                            |
-| -------------------------------------------------- | ---------------------------------------------------------------------- |
-| `GH_TOKEN_RELEASE`, `GH_TOKEN` or `GITHUB_TOKEN`   | **Required.** The token used to authenticate with GitHub.              |
-| `GITHUB_API_URL` or `GH_URL` or `GITHUB_URL`       | The GitHub Enterprise endpoint.                                        |
-| `GH_PREFIX` or `GITHUB_PREFIX`                     | The GitHub Enterprise API prefix.                                      |
-| `GH_SHA` or `GITHUB_SHA`                           | The commit sha reference to create the new branch for the pull request |
+| Variable                                           | Description                                                                                                                    |
+| -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `GH_TOKEN_RELEASE`, `GH_TOKEN` or `GITHUB_TOKEN`   | **Required.** The token used to authenticate with GitHub.                                                                      |
+| `GITHUB_API_URL` or `GH_URL` or `GITHUB_URL`       | The GitHub Enterprise endpoint.                                                                                                |
+| `GH_PREFIX` or `GITHUB_PREFIX`                     | The GitHub Enterprise API prefix.                                                                                              |
+| `GH_SHA` or `GITHUB_SHA`                           | The commit sha reference to create the new branch for the pull request. On GitHub Actions, this variable is automatically set. |
 
 ### Options
 
 | Option                | Description                                                                                                                                      | Default                                                     |
-| :-------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------- |
-| `githubUrl`           | The GitHub Enterprise endpoint.                                                                                                                  | `GH_URL` or `GITHUB_URL` environment variable.                                                  |
-| `githubApiPathPrefix` | The GitHub Enterprise API prefix.                                                                                                                | `GH_PREFIX` or `GITHUB_PREFIX` environment variable.                                               |
-| `proxy`               | The proxy to use to access the GitHub API. See [proxy](#proxy).                                                                                  | `HTTP_PROXY` environment variable.                                                               |
-| `assets`              | **Required.**. An array of files to upload to the release. See [assets](#assets).                                                                | -                                                                                   |
-| `branch`              | Name of the branch that will be created in the repository.                                                                                       | `semantic-release-pr<%= nextRelease.version ? \`-\${nextRelease.version}\` : "" %>` |
-| `pullrequestTitle`    | Title for the pull request. This title will also be used for all commit created to upload the assets. See [pullrequestTitle](#pullrequestTitle). | `chore(release): update release<%= nextRelease.version ? \` \${nextRelease.version}\` : "" %>`       |
-| `labels`              | The [labels](https://help.github.com/articles/about-labels) to add to the pull request created. Set to `false` to not add any label.             | `['semantic-release']`                                                                                   |
-| `baseRef`             | The base branch used to create the pull request (usually `main` or `master`).                                                                    | `main`                                                                              |
+| :-------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------- |
+| `githubUrl`           | The GitHub Enterprise endpoint.                                                                                                                  | `GH_URL` or `GITHUB_URL` environment variable.                                                 |
+| `githubApiPathPrefix` | The GitHub Enterprise API prefix.                                                                                                                | `GH_PREFIX` or `GITHUB_PREFIX` environment variable.                                           |
+| `proxy`               | The proxy to use to access the GitHub API. See [proxy](#proxy).                                                                                  | `HTTP_PROXY` environment variable.                                                             |
+| `assets`              | **Required.**. An array of files to upload to the release. See [assets](#assets).                                                                | -                                                                                              |
+| `branch`              | Name of the branch that will be created in the repository.                                                                                       | `semantic-release-pr<%= nextRelease.version ? \`-\${nextRelease.version}\` : "" %>`            |
+| `pullrequestTitle`    | Title for the pull request. This title will also be used for all commit created to upload the assets. See [pullrequestTitle](#pullrequestTitle). | `chore(release): update release<%= nextRelease.version ? \` \${nextRelease.version}\` : "" %>` |
+| `labels`              | The [labels](https://help.github.com/articles/about-labels) to add to the pull request created. Set to `false` to not add any label.             | `['semantic-release']`                                                                         |
+| `baseRef`             | The base branch used to create the pull request (usually `main` or `master`).                                                                    | `main`                                                                                         |
 
 
 
@@ -140,14 +141,3 @@ The title of the pull request is generated with [Lodash template](https://lodash
 | `lastRelease` | `Object` with `version`, `channel`, `gitTag` and `gitHead` of the last release.                                                                                                                                                                                               |
 | `nextRelease` | `Object` with `version`, `channel`, `gitTag`, `gitHead` and `notes` of the release being done.                                                                                                                                                                                |
 | `releases`    | `Array` with a release `Object`s for each release published, with optional release data such as `name` and `url`.                                                                                                                                                             |
-
-
-## Plugins
-
-### `verifyConditions`
-
-Verify that all needed configuration is present.
-
-### `success`
-
-Create the branch to upload all assets and create the pull request on the base branch.
