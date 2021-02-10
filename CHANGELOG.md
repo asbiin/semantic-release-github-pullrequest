@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/asbiin/semantic-release-github-pullrequest/compare/v1.1.0...v1.1.1) (2021-02-10)
+
+
+### Performance Improvements
+
+* use 'publish' semantic-relase action ([#12](https://github.com/asbiin/semantic-release-github-pullrequest/issues/12)) ([2b940f1](https://github.com/asbiin/semantic-release-github-pullrequest/commit/2b940f1da02f2d35a222a4e2332bca1d5fd6d55d))
+
 # [1.1.0](https://github.com/asbiin/semantic-release-github-pullrequest/compare/v1.0.1...v1.1.0) (2021-02-10)
 
 
