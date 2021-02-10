@@ -1,5 +1,5 @@
 const verify = require('./lib/verify');
-const successCall = require('./lib/success');
+const publishCall = require('./lib/publish');
 
 let verified;
 
@@ -8,16 +8,16 @@ async function verifyConditions(pluginConfig, context) {
   verified = true;
 }
 
-async function success(pluginConfig, context) {
+async function publish(pluginConfig, context) {
   if (!verified) {
     await verify(pluginConfig, context);
     verified = true;
   }
 
-  await successCall(pluginConfig, context);
+  await publishCall(pluginConfig, context);
 }
 
 module.exports = {
   verifyConditions,
-  success,
+  publish,
 };
