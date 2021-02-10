@@ -8,7 +8,7 @@ const rateLimit = require('../semantic-release-github/test/helpers/rate-limit');
 /* eslint camelcase: ["error", {properties: "never"}] */
 
 const cwd = 'test/fixtures/files';
-const success = proxyquire('../lib/success', {
+const publish = proxyquire('../lib/publish', {
   '@semantic-release/github/lib/get-client': proxyquire('@semantic-release/github/lib/get-client', {
     '@semantic-release/github/lib/definitions/rate-limit': rateLimit,
   }),
@@ -56,7 +56,7 @@ test.serial('Create PR with 1 file', async (t) => {
     .put(`/repos/${owner}/${repo}/issues/1/labels`, '{"labels":["semantic-release"]}')
     .reply(200, {});
 
-  await success(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger });
+  await publish(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger });
 
   t.true(t.context.log.calledWith("Branch '%s' is free", 'semantic-release-pr-1.0.0'));
   t.true(t.context.log.calledWith("Creating branch '%s'", 'semantic-release-pr-1.0.0'));
@@ -97,7 +97,7 @@ test.serial('Create PR with 1 new file', async (t) => {
     .put(`/repos/${owner}/${repo}/issues/1/labels`, '{"labels":["semantic-release"]}')
     .reply(200, {});
 
-  await success(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger });
+  await publish(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger });
 
   t.true(t.context.log.calledWith("Branch '%s' is free", 'semantic-release-pr-1.0.0'));
   t.true(t.context.log.calledWith("Creating branch '%s'", 'semantic-release-pr-1.0.0'));
@@ -144,7 +144,7 @@ test.serial('Create PR with 2 files', async (t) => {
     .put(`/repos/${owner}/${repo}/issues/1/labels`, '{"labels":["semantic-release"]}')
     .reply(200, {});
 
-  await success(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger });
+  await publish(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger });
 
   t.true(t.context.log.calledWith("Branch '%s' is free", 'semantic-release-pr-1.0.0'));
   t.true(t.context.log.calledWith("Creating branch '%s'", 'semantic-release-pr-1.0.0'));
@@ -182,7 +182,7 @@ test.serial('Create PR with pullrequest title', async (t) => {
     .put(`/repos/${owner}/${repo}/issues/1/labels`, '{"labels":["semantic-release"]}')
     .reply(200, {});
 
-  await success(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger });
+  await publish(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger });
 
   t.true(t.context.log.calledWith("Branch '%s' is free", 'semantic-release-pr-1.0.0'));
   t.true(t.context.log.calledWith("Creating branch '%s'", 'semantic-release-pr-1.0.0'));
@@ -222,7 +222,7 @@ test.serial('Create PR with labels', async (t) => {
     .put(`/repos/${owner}/${repo}/issues/1/labels`, '{"labels":["mylabel"]}')
     .reply(200, {});
 
-  await success(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger });
+  await publish(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger });
 
   t.true(t.context.log.calledWith("Branch '%s' is free", 'semantic-release-pr-1.0.0'));
   t.true(t.context.log.calledWith("Creating branch '%s'", 'semantic-release-pr-1.0.0'));
@@ -262,7 +262,7 @@ test.serial('Create PR with branch', async (t) => {
     .put(`/repos/${owner}/${repo}/issues/1/labels`, '{"labels":["semantic-release"]}')
     .reply(200, {});
 
-  await success(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger });
+  await publish(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger });
 
   t.true(t.context.log.calledWith("Branch '%s' is free", 'newbranch'));
   t.true(t.context.log.calledWith("Creating branch '%s'", 'newbranch'));
@@ -304,7 +304,7 @@ test.serial('Create PR with branch already exist', async (t) => {
     .put(`/repos/${owner}/${repo}/issues/1/labels`, '{"labels":["semantic-release"]}')
     .reply(200, {});
 
-  await success(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger });
+  await publish(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger });
 
   t.true(t.context.log.calledWith("Branch '%s' already exist", 'newbranch'));
   t.true(t.context.log.calledWith("Branch '%s' is free", 'newbranch-1'));
@@ -347,7 +347,7 @@ test.serial('Create PR with default branch already exist', async (t) => {
     .put(`/repos/${owner}/${repo}/issues/1/labels`, '{"labels":["semantic-release"]}')
     .reply(200, {});
 
-  await success(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger });
+  await publish(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger });
 
   t.true(t.context.log.calledWith("Branch '%s' already exist", 'semantic-release-pr-1.0.0'));
   t.true(t.context.log.calledWith("Branch '%s' is free", 'semantic-release-pr-1.0.0-1'));

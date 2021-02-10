@@ -14,7 +14,7 @@ It automatically creates a pull request containing changes for any files you wan
 | Step               | Description                                                                                      |
 | ------------------ | ------------------------------------------------------------------------------------------------ |
 | `verifyConditions` | Verify that all needed configuration is present.                                                 |
-| `success`          | Create the branch to upload all assets and create the pull request on the base branch on GitHub. |
+| `publish`          | Create a branch to upload all assets and create the pull request on the base branch on GitHub. |
 
 
 ## Install
