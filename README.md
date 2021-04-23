@@ -77,7 +77,7 @@ You can use `GH_TOKEN` or `GITHUB_TOKEN` with the secret _GITHUB_TOKEN_ to creat
 | :-------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------- |
 | `githubUrl`           | The GitHub Enterprise endpoint.                                                                                                                  | `GH_URL` or `GITHUB_URL` environment variable.                                                 |
 | `githubApiPathPrefix` | The GitHub Enterprise API prefix.                                                                                                                | `GH_PREFIX` or `GITHUB_PREFIX` environment variable.                                           |
-| `proxy`               | The proxy to use to access the GitHub API. See [proxy](#proxy).                                                                                  | `HTTP_PROXY` environment variable.                                                             |
+| `proxy`               | The proxy to use to access the GitHub API. Set to `false` to disable usage of proxy. See [proxy](#proxy).                                                                                  | `HTTP_PROXY` environment variable.                                                             |
 | `assets`              | **Required.**. An array of files to upload to the release. See [assets](#assets).                                                                | -                                                                                              |
 | `branch`              | Name of the branch that will be created in the repository.                                                                                       | `semantic-release-pr<%= nextRelease.version ? \`-\${nextRelease.version}\` : "" %>`            |
 | `pullrequestTitle`    | Title for the pull request. This title will also be used for all commit created to upload the assets. See [pullrequestTitle](#pullrequestTitle). | `chore(release): update release<%= nextRelease.version ? \` \${nextRelease.version}\` : "" %>` |
@@ -88,7 +88,7 @@ You can use `GH_TOKEN` or `GITHUB_TOKEN` with the secret _GITHUB_TOKEN_ to creat
 
 #### proxy
 
-Can be a the proxy URL or and `Object` with the following properties:
+Can be `false`, a proxy URL or an `Object` with the following properties:
 
 | Property      | Description                                                    | Default                              |
 |---------------|----------------------------------------------------------------|--------------------------------------|
