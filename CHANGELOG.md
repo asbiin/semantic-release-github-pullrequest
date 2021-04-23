@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/asbiin/semantic-release-github-pullrequest/compare/v1.1.1...v1.1.2) (2021-04-23)
+
+
+### Bug Fixes
+
+* allow proxy to be false ([#34](https://github.com/asbiin/semantic-release-github-pullrequest/issues/34)) ([f87745c](https://github.com/asbiin/semantic-release-github-pullrequest/commit/f87745c3008758807c80ed5a2f4e2e5443a91ac8))
+
 ## [1.1.1](https://github.com/asbiin/semantic-release-github-pullrequest/compare/v1.1.0...v1.1.1) (2021-02-10)
 
 
