@@ -73,7 +73,7 @@
     "url-join": "^4.0.1"
   },
   "peerDependencies": {
-    "semantic-release": ">=11.0.0"
+    "semantic-release": ">=18.0.0"
   },
   "nyc": {
     "include": [
