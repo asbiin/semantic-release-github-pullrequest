@@ -36,9 +36,6 @@ test.serial('Create PR with 1 file', async (t) => {
   const options = { branch: 'main', repositoryUrl: `https://github.com/${owner}/${repo}.git` };
   const nextRelease = { version: '1.0.0' };
   const github = authenticate(env)
-    .get(`/repos/${owner}/${repo}/git/ref/heads%2Fsemantic-release-pr-1.0.0`)
-    .times(4)
-    .reply(404)
     .post(`/repos/${owner}/${repo}/git/refs`, `{"ref":"${branch}","sha":"12345"}`)
     .reply(201, { ref: branch })
     .get(`/repos/${owner}/${repo}/contents/file1.txt?ref=${branch}`)
@@ -58,7 +55,6 @@ test.serial('Create PR with 1 file', async (t) => {
 
   await publish(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger });
 
-  t.true(t.context.log.calledWith("Branch '%s' is free", 'semantic-release-pr-1.0.0'));
   t.true(t.context.log.calledWith("Creating branch '%s'", 'semantic-release-pr-1.0.0'));
   t.true(t.context.log.calledWith('Creating a pull request for version %s', '1.0.0'));
   t.true(t.context.log.calledWith("Upload file '%s'", 'file1.txt'));
@@ -76,9 +72,6 @@ test.serial('Create PR with 1 new file', async (t) => {
   const options = { branch: 'main', repositoryUrl: `https://github.com/${owner}/${repo}.git` };
   const nextRelease = { version: '1.0.0' };
   const github = authenticate(env)
-    .get(`/repos/${owner}/${repo}/git/ref/heads%2Fsemantic-release-pr-1.0.0`)
-    .times(4)
-    .reply(404)
     .post(`/repos/${owner}/${repo}/git/refs`, `{"ref":"${branch}","sha":"12345"}`)
     .reply(201, { ref: branch })
     .get(`/repos/${owner}/${repo}/contents/file1.txt?ref=${branch}`)
@@ -99,7 +92,6 @@ test.serial('Create PR with 1 new file', async (t) => {
 
   await publish(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger });
 
-  t.true(t.context.log.calledWith("Branch '%s' is free", 'semantic-release-pr-1.0.0'));
   t.true(t.context.log.calledWith("Creating branch '%s'", 'semantic-release-pr-1.0.0'));
   t.true(t.context.log.calledWith('Creating a pull request for version %s', '1.0.0'));
   t.true(t.context.log.calledWith("Upload file '%s'", 'file1.txt'));
@@ -117,9 +109,6 @@ test.serial('Create PR with 2 files', async (t) => {
   const options = { branch: 'main', repositoryUrl: `https://github.com/${owner}/${repo}.git` };
   const nextRelease = { version: '1.0.0' };
   const github = authenticate(env)
-    .get(`/repos/${owner}/${repo}/git/ref/heads%2Fsemantic-release-pr-1.0.0`)
-    .times(4)
-    .reply(404)
     .post(`/repos/${owner}/${repo}/git/refs`, `{"ref":"${branch}","sha":"12345"}`)
     .reply(201, { ref: branch })
     .get(`/repos/${owner}/${repo}/contents/file1.txt?ref=${branch}`)
@@ -146,7 +135,6 @@ test.serial('Create PR with 2 files', async (t) => {
 
   await publish(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger });
 
-  t.true(t.context.log.calledWith("Branch '%s' is free", 'semantic-release-pr-1.0.0'));
   t.true(t.context.log.calledWith("Creating branch '%s'", 'semantic-release-pr-1.0.0'));
   t.true(t.context.log.calledWith('Creating a pull request for version %s', '1.0.0'));
   t.true(t.context.log.calledWith("Upload file '%s'", 'file1.txt'));
@@ -165,9 +153,6 @@ test.serial('Create PR with pullrequest title', async (t) => {
   const options = { branch: 'main', repositoryUrl: `https://github.com/${owner}/${repo}.git` };
   const nextRelease = { version: '1.0.0' };
   const github = authenticate(env)
-    .get(`/repos/${owner}/${repo}/git/ref/heads%2Fsemantic-release-pr-1.0.0`)
-    .times(4)
-    .reply(404)
     .post(`/repos/${owner}/${repo}/git/refs`, `{"ref":"${branch}","sha":"12345"}`)
     .reply(201, { ref: branch })
     .get(`/repos/${owner}/${repo}/contents/file1.txt?ref=${branch}`)
@@ -184,7 +169,6 @@ test.serial('Create PR with pullrequest title', async (t) => {
 
   await publish(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger });
 
-  t.true(t.context.log.calledWith("Branch '%s' is free", 'semantic-release-pr-1.0.0'));
   t.true(t.context.log.calledWith("Creating branch '%s'", 'semantic-release-pr-1.0.0'));
   t.true(t.context.log.calledWith('Creating a pull request for version %s', '1.0.0'));
   t.true(t.context.log.calledWith("Upload file '%s'", 'file1.txt'));
@@ -202,9 +186,6 @@ test.serial('Create PR with labels', async (t) => {
   const options = { branch: 'main', repositoryUrl: `https://github.com/${owner}/${repo}.git` };
   const nextRelease = { version: '1.0.0' };
   const github = authenticate(env)
-    .get(`/repos/${owner}/${repo}/git/ref/heads%2Fsemantic-release-pr-1.0.0`)
-    .times(4)
-    .reply(404)
     .post(`/repos/${owner}/${repo}/git/refs`, `{"ref":"${branch}","sha":"12345"}`)
     .reply(201, { ref: branch })
     .get(`/repos/${owner}/${repo}/contents/file1.txt?ref=${branch}`)
@@ -224,7 +205,6 @@ test.serial('Create PR with labels', async (t) => {
 
   await publish(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger });
 
-  t.true(t.context.log.calledWith("Branch '%s' is free", 'semantic-release-pr-1.0.0'));
   t.true(t.context.log.calledWith("Creating branch '%s'", 'semantic-release-pr-1.0.0'));
   t.true(t.context.log.calledWith('Creating a pull request for version %s', '1.0.0'));
   t.true(t.context.log.calledWith("Upload file '%s'", 'file1.txt'));
@@ -242,9 +222,6 @@ test.serial('Create PR with branch', async (t) => {
   const options = { branch: 'main', repositoryUrl: `https://github.com/${owner}/${repo}.git` };
   const nextRelease = { version: '1.0.0' };
   const github = authenticate(env)
-    .get(`/repos/${owner}/${repo}/git/ref/heads%2Fnewbranch`)
-    .times(4)
-    .reply(404)
     .post(`/repos/${owner}/${repo}/git/refs`, `{"ref":"${branch}","sha":"12345"}`)
     .reply(201, { ref: branch })
     .get(`/repos/${owner}/${repo}/contents/file1.txt?ref=${branch}`)
@@ -264,7 +241,6 @@ test.serial('Create PR with branch', async (t) => {
 
   await publish(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger });
 
-  t.true(t.context.log.calledWith("Branch '%s' is free", 'newbranch'));
   t.true(t.context.log.calledWith("Creating branch '%s'", 'newbranch'));
   t.true(t.context.log.calledWith('Creating a pull request for version %s', '1.0.0'));
   t.true(t.context.log.calledWith("Upload file '%s'", 'file1.txt'));
@@ -282,11 +258,8 @@ test.serial('Create PR with branch already exist', async (t) => {
   const options = { branch: 'main', repositoryUrl: `https://github.com/${owner}/${repo}.git` };
   const nextRelease = { version: '1.0.0' };
   const github = authenticate(env)
-    .get(`/repos/${owner}/${repo}/git/ref/heads%2Fnewbranch`)
-    .reply(200)
-    .get(`/repos/${owner}/${repo}/git/ref/heads%2Fnewbranch-1`)
-    .times(4)
-    .reply(404)
+    .post(`/repos/${owner}/${repo}/git/refs`, `{"ref":"refs/heads/newbranch","sha":"12345"}`)
+    .reply(401)
     .post(`/repos/${owner}/${repo}/git/refs`, `{"ref":"${branch}","sha":"12345"}`)
     .reply(201, { ref: branch })
     .get(`/repos/${owner}/${repo}/contents/file1.txt?ref=${branch}`)
@@ -306,8 +279,7 @@ test.serial('Create PR with branch already exist', async (t) => {
 
   await publish(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger });
 
-  t.true(t.context.log.calledWith("Branch '%s' already exist", 'newbranch'));
-  t.true(t.context.log.calledWith("Branch '%s' is free", 'newbranch-1'));
+  t.true(t.context.log.calledWith("Branch '%s' not created (error %d)", 'newbranch', 401));
   t.true(t.context.log.calledWith("Creating branch '%s'", 'newbranch-1'));
   t.true(t.context.log.calledWith('Creating a pull request for version %s', '1.0.0'));
   t.true(t.context.log.calledWith("Upload file '%s'", 'file1.txt'));
@@ -325,11 +297,8 @@ test.serial('Create PR with default branch already exist', async (t) => {
   const options = { branch: 'main', repositoryUrl: `https://github.com/${owner}/${repo}.git` };
   const nextRelease = { version: '1.0.0' };
   const github = authenticate(env)
-    .get(`/repos/${owner}/${repo}/git/ref/heads%2Fsemantic-release-pr-1.0.0`)
-    .reply(200)
-    .get(`/repos/${owner}/${repo}/git/ref/heads%2Fsemantic-release-pr-1.0.0-1`)
-    .times(4)
-    .reply(404)
+    .post(`/repos/${owner}/${repo}/git/refs`, `{"ref":"refs/heads/semantic-release-pr-1.0.0","sha":"12345"}`)
+    .reply(401)
     .post(`/repos/${owner}/${repo}/git/refs`, `{"ref":"${branch}","sha":"12345"}`)
     .reply(201, { ref: branch })
     .get(`/repos/${owner}/${repo}/contents/file1.txt?ref=${branch}`)
@@ -349,8 +318,7 @@ test.serial('Create PR with default branch already exist', async (t) => {
 
   await publish(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger });
 
-  t.true(t.context.log.calledWith("Branch '%s' already exist", 'semantic-release-pr-1.0.0'));
-  t.true(t.context.log.calledWith("Branch '%s' is free", 'semantic-release-pr-1.0.0-1'));
+  t.true(t.context.log.calledWith("Branch '%s' not created (error %d)", 'semantic-release-pr-1.0.0', 401));
   t.true(t.context.log.calledWith("Creating branch '%s'", 'semantic-release-pr-1.0.0-1'));
   t.true(t.context.log.calledWith('Creating a pull request for version %s', '1.0.0'));
   t.true(t.context.log.calledWith("Upload file '%s'", 'file1.txt'));
