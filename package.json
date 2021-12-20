@@ -3,7 +3,7 @@
   "description": "semantic-release plugin to create a github pullrequest",
   "version": "0.0.0-development",
   "engines": {
-    "node": ">=12"
+    "node": ">=14"
   },
   "author": "Alexis Saettler <alexis@saettler.org>",
   "license": "MIT",
@@ -42,10 +42,10 @@
   "main": "index.js",
   "dependencies": {
     "@octokit/rest": "^18.1.0",
-    "@semantic-release/error": "^2.2.0",
-    "@semantic-release/github": "^7.2.0",
+    "@semantic-release/error": "^3.0.0",
+    "@semantic-release/github": "^8.0.2",
     "aggregate-error": "^3.1.0",
-    "fs-extra": "^9.1.0",
+    "fs-extra": "^10.0.0",
     "js-base64": "^3.6.0",
     "lodash": "^4.17.20",
     "util": "^0.12.3"
@@ -58,9 +58,9 @@
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^3.3.1",
-    "eslint-plugin-promise": "^4.2.1",
-    "http-proxy-agent": "^4.0.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-promise": "^5.0.0",
+    "http-proxy-agent": "^5.0.0",
     "https-proxy-agent": "^5.0.0",
     "nock": "^13.0.7",
     "nyc": "^15.1.0",
@@ -69,7 +69,7 @@
     "proxy": "^1.0.2",
     "proxyquire": "^2.1.3",
     "server-destroy": "^1.0.1",
-    "sinon": "^9.2.4",
+    "sinon": "^12.0.1",
     "url-join": "^4.0.1"
   },
   "peerDependencies": {
