@@ -6,6 +6,15 @@
 * fix branch creation process ([#99](https://github.com/asbiin/semantic-release-github-pullrequest/issues/99)) ([e83313b](https://github.com/asbiin/semantic-release-github-pullrequest/commit/e83313b500d2d74ddd01b20fac13769302eb4713))
 * fix peer dependency ([#98](https://github.com/asbiin/semantic-release-github-pullrequest/issues/98)) ([5fa7baa](https://github.com/asbiin/semantic-release-github-pullrequest/commit/5fa7baad1eea9a348f085939a476c09671a52527))
 
+
+# [1.2.0](https://github.com/asbiin/semantic-release-github-pullrequest/compare/v1.1.2...v1.2.0) (2021-12-19)
+
+
+### Features
+
+* unlock semantic-release peerDependencies >18 ([#95](https://github.com/asbiin/semantic-release-github-pullrequest/issues/95)) ([4450ce5](https://github.com/asbiin/semantic-release-github-pullrequest/commit/4450ce59aa04dfa92ed82f0caf61e51ed5d733aa))
+
+
 ## [1.1.2](https://github.com/asbiin/semantic-release-github-pullrequest/compare/v1.1.1...v1.1.2) (2021-04-23)
 
 
