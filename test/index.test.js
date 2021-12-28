@@ -117,39 +117,3 @@ test.serial('Throw SemanticReleaseError if invalid config', async (t) => {
   t.is(errors[1].name, 'SemanticReleaseError');
   t.is(errors[1].code, 'ENOGHTOKEN');
 });
-
-test.serial('Create PR with 1 file', async (t) => {
-  const owner = 'test_user';
-  const repo = 'test_repo';
-  const branch = 'refs/heads/semantic-release-pr-1.0.0';
-  const env = { GITHUB_TOKEN: 'github_token', GITHUB_SHA: '12345' };
-  const assets = ['file1.txt'];
-  const pluginConfig = { assets };
-  const options = { branch: 'main', repositoryUrl: `https://github.com/${owner}/${repo}.git` };
-  const nextRelease = { version: '1.0.0' };
-  const github = authenticate(env)
-    .post(`/repos/${owner}/${repo}/git/refs`, `{"ref":"${branch}","sha":"12345"}`)
-    .reply(201, { ref: branch })
-    .get(`/repos/${owner}/${repo}/contents/file1.txt?ref=${branch}`)
-    .reply(302, { sha: '123' })
-    .put(
-      `/repos/${owner}/${repo}/contents/file1.txt`,
-      `{"message":"chore(release): update release 1.0.0","content":"VXBsb2FkIGZpbGUgY29udGVudA==","sha":"123","branch":"${branch}"}`
-    )
-    .reply(200, {})
-    .post(
-      `/repos/${owner}/${repo}/pulls`,
-      `{"head":"${branch}","base":"main","title":"chore(release): update release 1.0.0"}`
-    )
-    .reply(200, { number: 1, html_url: `https://github.com/${owner}/${repo}/pull/1` })
-    .put(`/repos/${owner}/${repo}/issues/1/labels`, '{"labels":["semantic-release"]}')
-    .reply(200, {});
-
-  await index.publish(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger });
-
-  t.true(t.context.log.calledWith("Creating branch '%s'", 'semantic-release-pr-1.0.0'));
-  t.true(t.context.log.calledWith('Creating a pull request for version %s', '1.0.0'));
-  t.true(t.context.log.calledWith("Upload file '%s'", 'file1.txt'));
-  t.true(t.context.log.calledWith('Pull Request created: %s', `https://github.com/${owner}/${repo}/pull/1`));
-  t.true(github.isDone());
-});

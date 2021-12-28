@@ -53,7 +53,7 @@ test.serial('Create PR with 1 file', async (t) => {
     .put(`/repos/${owner}/${repo}/issues/1/labels`, '{"labels":["semantic-release"]}')
     .reply(200, {});
 
-  await publish(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger });
+  await t.notThrowsAsync(publish(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger }));
 
   t.true(t.context.log.calledWith("Creating branch '%s'", 'semantic-release-pr-1.0.0'));
   t.true(t.context.log.calledWith('Creating a pull request for version %s', '1.0.0'));
@@ -90,7 +90,7 @@ test.serial('Create PR with 1 new file', async (t) => {
     .put(`/repos/${owner}/${repo}/issues/1/labels`, '{"labels":["semantic-release"]}')
     .reply(200, {});
 
-  await publish(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger });
+  await t.notThrowsAsync(publish(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger }));
 
   t.true(t.context.log.calledWith("Creating branch '%s'", 'semantic-release-pr-1.0.0'));
   t.true(t.context.log.calledWith('Creating a pull request for version %s', '1.0.0'));
@@ -133,7 +133,7 @@ test.serial('Create PR with 2 files', async (t) => {
     .put(`/repos/${owner}/${repo}/issues/1/labels`, '{"labels":["semantic-release"]}')
     .reply(200, {});
 
-  await publish(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger });
+  await t.notThrowsAsync(publish(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger }));
 
   t.true(t.context.log.calledWith("Creating branch '%s'", 'semantic-release-pr-1.0.0'));
   t.true(t.context.log.calledWith('Creating a pull request for version %s', '1.0.0'));
@@ -167,7 +167,7 @@ test.serial('Create PR with pullrequest title', async (t) => {
     .put(`/repos/${owner}/${repo}/issues/1/labels`, '{"labels":["semantic-release"]}')
     .reply(200, {});
 
-  await publish(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger });
+  await t.notThrowsAsync(publish(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger }));
 
   t.true(t.context.log.calledWith("Creating branch '%s'", 'semantic-release-pr-1.0.0'));
   t.true(t.context.log.calledWith('Creating a pull request for version %s', '1.0.0'));
@@ -203,7 +203,7 @@ test.serial('Create PR with labels', async (t) => {
     .put(`/repos/${owner}/${repo}/issues/1/labels`, '{"labels":["mylabel"]}')
     .reply(200, {});
 
-  await publish(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger });
+  await t.notThrowsAsync(publish(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger }));
 
   t.true(t.context.log.calledWith("Creating branch '%s'", 'semantic-release-pr-1.0.0'));
   t.true(t.context.log.calledWith('Creating a pull request for version %s', '1.0.0'));
@@ -239,7 +239,7 @@ test.serial('Create PR with branch', async (t) => {
     .put(`/repos/${owner}/${repo}/issues/1/labels`, '{"labels":["semantic-release"]}')
     .reply(200, {});
 
-  await publish(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger });
+  await t.notThrowsAsync(publish(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger }));
 
   t.true(t.context.log.calledWith("Creating branch '%s'", 'newbranch'));
   t.true(t.context.log.calledWith('Creating a pull request for version %s', '1.0.0'));
@@ -277,7 +277,7 @@ test.serial('Create PR with branch already exist', async (t) => {
     .put(`/repos/${owner}/${repo}/issues/1/labels`, '{"labels":["semantic-release"]}')
     .reply(200, {});
 
-  await publish(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger });
+  await t.notThrowsAsync(publish(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger }));
 
   t.true(t.context.log.calledWith("Branch '%s' not created (error %d)", 'newbranch', 401));
   t.true(t.context.log.calledWith("Creating branch '%s'", 'newbranch-1'));
@@ -316,7 +316,7 @@ test.serial('Create PR with default branch already exist', async (t) => {
     .put(`/repos/${owner}/${repo}/issues/1/labels`, '{"labels":["semantic-release"]}')
     .reply(200, {});
 
-  await publish(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger });
+  await t.notThrowsAsync(publish(pluginConfig, { env, cwd, options, nextRelease, logger: t.context.logger }));
 
   t.true(t.context.log.calledWith("Branch '%s' not created (error %d)", 'semantic-release-pr-1.0.0', 401));
   t.true(t.context.log.calledWith("Creating branch '%s'", 'semantic-release-pr-1.0.0-1'));
