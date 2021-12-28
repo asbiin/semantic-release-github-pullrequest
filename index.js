@@ -10,8 +10,7 @@ async function verifyConditions(pluginConfig, context) {
 
 async function publish(pluginConfig, context) {
   if (!verified) {
-    await verify(pluginConfig, context);
-    verified = true;
+    await verifyConditions(pluginConfig, context);
   }
 
   await publishCall(pluginConfig, context);
