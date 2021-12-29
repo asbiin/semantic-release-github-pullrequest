@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/asbiin/semantic-release-github-pullrequest/compare/v1.2.1...v1.3.0) (2021-12-29)
+
+
+### Features
+
+* Supports monorepo ([#87](https://github.com/asbiin/semantic-release-github-pullrequest/issues/87)) ([b08c1ff](https://github.com/asbiin/semantic-release-github-pullrequest/commit/b08c1ffa33418287c5a9392a0414fb5a0f230282))
+
 ## [1.2.1](https://github.com/asbiin/semantic-release-github-pullrequest/compare/v1.2.0...v1.2.1) (2021-12-20)
 
 
