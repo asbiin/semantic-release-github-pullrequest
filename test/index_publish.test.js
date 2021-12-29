@@ -5,6 +5,7 @@ const proxyquire = require('proxyquire');
 const clearModule = require('clear-module');
 const {authenticate} = require('../semantic-release-github/test/helpers/mock-github');
 const rateLimit = require('../semantic-release-github/test/helpers/rate-limit');
+const path = require('path');
 
 const cwd = 'test/fixtures/files';
 const client = proxyquire(
@@ -40,6 +41,8 @@ test.serial('Run publish with 1 file', async (t) => {
   const pluginConfig = { assets };
   const options = { branch: 'main', repositoryUrl: `https://github.com/${owner}/${repo}.git` };
   const nextRelease = { version: '1.0.0' };
+  const file1Path = path.join(cwd, 'file1.txt');
+
   const github = authenticate(env)
     .get(`/repos/${owner}/${repo}`)
     .reply(200, { permissions: { push: true } })
@@ -47,10 +50,10 @@ test.serial('Run publish with 1 file', async (t) => {
     .reply(200)
     .post(`/repos/${owner}/${repo}/git/refs`, `{"ref":"${branch}","sha":"12345"}`)
     .reply(201, { ref: branch })
-    .get(`/repos/${owner}/${repo}/contents/file1.txt?ref=${branch}`)
+    .get(`/repos/${owner}/${repo}/contents/${encodeURIComponent(file1Path)}?ref=${branch}`)
     .reply(302, { sha: '123' })
     .put(
-      `/repos/${owner}/${repo}/contents/file1.txt`,
+      `/repos/${owner}/${repo}/contents/${encodeURIComponent(file1Path)}`,
       `{"message":"chore(release): update release 1.0.0","content":"VXBsb2FkIGZpbGUgY29udGVudA==","sha":"123","branch":"${branch}"}`
     )
     .reply(200, {})
@@ -66,7 +69,7 @@ test.serial('Run publish with 1 file', async (t) => {
 
   t.true(t.context.log.calledWith("Creating branch '%s'", 'semantic-release-pr-1.0.0'));
   t.true(t.context.log.calledWith('Creating a pull request for version %s', '1.0.0'));
-  t.true(t.context.log.calledWith("Upload file '%s'", 'file1.txt'));
+  t.true(t.context.log.calledWith("Upload file '%s'", file1Path));
   t.true(t.context.log.calledWith('Pull Request created: %s', `https://github.com/${owner}/${repo}/pull/1`));
   t.true(github.isDone());
 });
