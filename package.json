@@ -41,7 +41,8 @@
   ],
   "main": "index.js",
   "dependencies": {
-    "@octokit/rest": "^18.1.0",
+    "@octokit/core": "^5.0.0",
+    "@octokit/rest": "^20.0.1",
     "@semantic-release/error": "^3.0.0",
     "@semantic-release/github": "^8.0.2",
     "aggregate-error": "^3.1.0",
@@ -50,6 +51,7 @@
     "fs-extra": "^10.0.0",
     "js-base64": "^3.6.0",
     "lodash": "^4.17.20",
+    "octokit-plugin-create-pull-request": "^5.1.0",
     "util": "^0.12.3"
   },
   "devDependencies": {
