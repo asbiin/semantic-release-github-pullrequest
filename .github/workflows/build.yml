@@ -9,7 +9,7 @@ on:
     types: [created]
 
 env:
-  default-node-version: 16
+  default-node-version: 18
 
 
 jobs:
@@ -19,7 +19,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14, 15, 16, 17, 18]
+        node-version: [18, 19, 20]
 
     steps:
       - uses: actions/checkout@v4
@@ -65,7 +65,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14, 15, 16, 17, 18]
+        node-version: [18, 19, 20]
 
     steps:
       - uses: actions/checkout@v4
